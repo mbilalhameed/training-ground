@@ -9,7 +9,7 @@ class SehgalMotorSpider(scrapy.Spider):
     name = 'sehgalmotors'
     start_urls = ['https://www.sehgalmotors.pk/', ]
     allowed_domain = 'sehgalmotors.pk'
-    link_extractor = LinkExtractor(allow='product/', allow_domains= allowed_domain)
+    link_extractor = LinkExtractor(allow='product/', allow_domains=allowed_domain)
     rules = [Rule(link_extractor=link_extractor, callback='parse', follow=True)]
     regex = re.compile(r'[\n\r\t ]+')
 
@@ -47,10 +47,6 @@ class SehgalMotorSpider(scrapy.Spider):
     
     def get_product_category(self, product):
         return product.css('nav.header_area a::text').getall()[1]
-    
-    
-    def get_product_sub_category(self, product):
-        return product.css('h1::attr(producttitle)').get()
     
     
     def get_product_name(self, product):
