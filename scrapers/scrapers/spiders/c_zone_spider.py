@@ -1,13 +1,11 @@
 import re
+
 from scrapy.spiders import Rule, CrawlSpider
 from scrapy.linkextractors import LinkExtractor
-
 class ComputerZone(CrawlSpider):
     
     name = 'czone'
     start_urls = ['https://www.czone.com.pk/', ]
-    allowed_domain = 'czone.com.pk'
-    
     regex = re.compile(r'[\n\r\t ]+')
     
     rules = (
@@ -32,7 +30,6 @@ class ComputerZone(CrawlSpider):
         product_description = self.get_product_description(response)
         product_highlights = self.get_product_highlights(response)
         product_overview = self.get_product_overview(response)
-        
         
         return {
             'product_url': product_url,
