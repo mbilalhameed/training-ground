@@ -1,8 +1,8 @@
 import re
+
 from scrapy.http import request
 from scrapy.spiders import Rule, CrawlSpider, Request
 from scrapy.linkextractors import LinkExtractor
-
 class SehgalMotorSpider(CrawlSpider):
     
     name = 'sapphire'
@@ -12,7 +12,6 @@ class SehgalMotorSpider(CrawlSpider):
     rules = (
         Rule(LinkExtractor(allow = 'collections/' ,restrict_css="ul#nt_menu_id"), callback="parse_collections" , follow=True),
     )
-    
     regex = re.compile(r'[\n\r\t ]+')
         
     def parse_collections(self, response):
@@ -83,4 +82,3 @@ class SehgalMotorSpider(CrawlSpider):
         if response.css("link[rel='next']::attr(href)").get():
             return self.start_urls[0] + response.css("link[rel='next']::attr(href)").get()
         return False
-    
